@@ -78,6 +78,11 @@ remove_button = """
     button.remove()
     """
 
+remove_button2= """
+    let button = document.querySelector('#jx06BT2')
+    button.remove()
+    """
+
 note = """
 var div1 = document.createElement('div');
 div1.id = 'jx06D2';
@@ -104,4 +109,28 @@ div1.innerText = `1.登入自己帳號後
 `
 
 document.body.appendChild(div1)
+"""
+
+
+injection_button2 = """
+
+
+var button = document.createElement('button');
+button.id = "jx06BT2"
+button.innerHTML = '繼續抓取';
+button.onclick = function() {
+    alert('繼續抓取');
+};
+
+button.style.position = 'fixed';
+button.style.top = '20px'; 
+button.style.right = '20px';
+button.style.backgroundColor = 'rgb(205 42 200)'; 
+button.style.borderRadius = '7px';
+button.style.border = '2px solid #953db6'; 
+button.style.cursor = 'pointer'; 
+button.style.width = '100px'; 
+button.style.height = '35px'; 
+
+document.body.appendChild(button);
 """
