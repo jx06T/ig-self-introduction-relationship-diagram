@@ -100,7 +100,7 @@ div1.style.fontFamily = 'Arial, sans-serif';
 div1.innerText = `1.登入自己帳號後
 2.找到要掃描的人主頁
 3.按下ctrl+alt+g叫出工具欄
-（掃描過程中ctrl+alt+g暫停）
+（掃描過程中長按ctrl+alt+g暫停）
 
 提示：
 建議搭配vpn避免ip被封鎖或降速

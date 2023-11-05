@@ -11,9 +11,9 @@ import HTML_JS
 import reptile
 
 def ShowGUI(driver):
-    global state
-    print(state)
-    if state == 0:
+    global crawler
+    driver.switch_to.window(driver.window_handles[-1])
+    if crawler.state == 0:
         print("ss")
         try:
             alert = driver.switch_to.alert
@@ -38,27 +38,27 @@ def ShowGUI(driver):
             pass
 
         DeleteGUI(driver)
-    elif state == 1:
-        global crawler
-        print(crawler.stopped)
-        crawler.DoStop()
-        driver.execute_script(HTML_JS.injection_button2)
-        try:
-            t = WebDriverWait(driver, timeout=30, poll_frequency=0.5).until(EC.alert_is_present())
-        except:
-            pass
+
+def Stoppp():
+    print("!!!!!!!!!!")
+    global crawler
+    driver.switch_to.window(driver.window_handles[-1])
+    driver.execute_script(HTML_JS.injection_button2)
+    try:
+        t = WebDriverWait(driver, timeout=30, poll_frequency=0.5).until(EC.alert_is_present())
+    except:
+        pass
+    
+    if not t == None:
+        crawler.Play()
+        return
         
-        if not t == None:
-            crawler.Play()
-            state = 0
-            return
-            
-        try:
-            alert = driver.switch_to.alert
-            alert.dismiss()
-        except:
-            pass
-        driver.execute_script(HTML_JS.remove_button2)
+    try:
+        alert = driver.switch_to.alert
+        alert.dismiss()
+    except:
+        pass
+    driver.execute_script(HTML_JS.remove_button2)
 
 
 def DeleteGUI(driver):
@@ -68,8 +68,6 @@ def CreatNewButton(driver):
     driver.execute_script(HTML_JS.injection_button)
 
 def start(driver):
-    global state
-    state = 1
     try:
         MaxLevel = driver.find_element(By.ID, 'jx06I2').get_attribute("value")
         MaxStep = driver.find_element(By.ID, 'jx06I1').get_attribute("value")
@@ -81,26 +79,27 @@ def start(driver):
         MaxLevel = ""
         MaxStep = ""
 
+    print(me,MaxLevel,MaxStep)
     MaxLevel = int(MaxLevel) if not MaxLevel == "" else 4
     MaxStep = int(MaxStep) if not MaxStep == "" else 300
     print("start")
     global crawler
-    crawler = reptile.InstagramCrawler(driver, MaxLevel, MaxStep)
+    crawler = reptile.InstagramCrawler(driver, MaxLevel, MaxStep,Stoppp)
     people = crawler.crawl()
     print(people)
     if not people:
         return
     graph = PeopleGraph(people)
-    graph.show_graph(me)
+    graph.show_graph(me,driver)
 
 # %%
 driver = webdriver.Chrome()
 driver.get("https://www.instagram.com/")
 time.sleep(1)
 driver.execute_script(HTML_JS.note)
-crawler = ""
-state = 0
+crawler = reptile.InstagramCrawler(driver,1,1,Stoppp)
 keyboard.add_hotkey('ctrl+alt+g',lambda: ShowGUI(driver) )
 keyboard.wait()
+
 input()
 driver.quit()

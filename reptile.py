@@ -5,14 +5,15 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import keyboard
 class InstagramCrawler:
-    def __init__(self, driver, max_level, max_step):
+    def __init__(self, driver, max_level, max_step,call_back):
         self.driver = driver
 
         self.MaxLevel = max_level
         self.MaxStep = max_step
         self.people = {}
         self.upcoming = []
-        self.stopped = False
+        self.state = 0
+        self.call_back = call_back
 
     def change(self, href):
         all_window_handles = self.driver.window_handles
@@ -32,11 +33,14 @@ class InstagramCrawler:
         return True
 
     def do_step(self, i):
-        if self.stopped :
+        if keyboard.is_pressed('ctrl+alt+g'):
+            self.state = 2
             self.I = i
+            self.call_back()
             return
         
         me = None
+        aboutMe = None
         # print(i,self.people,self.upcoming,me)
         try:
             wait = WebDriverWait(self.driver, 0.5)
@@ -46,10 +50,10 @@ class InstagramCrawler:
         except:
             pass
 
-        if me is None:
+        if me == None or aboutMe == None:
             try:
                 NN = self.driver.find_element(By.XPATH, '//span[contains(text(), "發生錯誤")]')
-                if i > self.MaxStep or not self.change(self.upcoming.pop(0)):
+                if i > self.MaxStep or not self.change(self.upcoming.pop(0) if self.upcoming else None):
                     return
 
                 time.sleep(0.5)
@@ -65,7 +69,7 @@ class InstagramCrawler:
                 me = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'h2.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.x1ms8i2q.xo1l8bm.x5n08af.x10wh9bi.x1wdrske.x8viiok.x18hxmgj')))
                 aboutMe = self.driver.find_element(By.XPATH, '//*[@class="x7a106z x972fbf xcfux6l x1qhh985 xm0m39n x9f619 x78zum5 xdt5ytf x2lah0s xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x1n2onr6 x11njtxf xwonja6 x1dyjupv x1onnzdu xwrz0qm xgmu61r x1nbz2ho xbjc6do"]')
             except:
-                if i > self.MaxStep or not self.change(self.upcoming.pop(0)):
+                if i > self.MaxStep or not self.change(self.upcoming.pop(0) if self.upcoming else None):
                     return
 
         # print(i,self.people,self.upcoming,me)
@@ -79,8 +83,8 @@ class InstagramCrawler:
         for at in ats:
             href = at.get_attribute("href")
             att = at.text[1:]
+            self.people[me.text]["at"].append(att)
             if "explore" not in href and "https://www.instagram.com/" in href and "followers" not in href and att not in self.people:
-                self.people[me.text]["at"].append(att)
 
                 self.people[att] = {}
                 self.people[att]["level"] = self.people[me.text]["level"] + 1
@@ -100,17 +104,18 @@ class InstagramCrawler:
         self.do_step(i + 1)
 
     def crawl(self):
+        self.state = 1
         self.do_step(0)
-        
+        self.state = 0
         return self.people
     
-    def DoStop(self):
-        self.stopped = True
-        print("!!!!!!!!!!!!!!!!!")
     def Play(self):
-        self.stopped = False
+        self.state = 1
         self.do_step(self.I)
         print("5555555555555555555555555555")
+
+def DoStop():
+    print("!!!!!!!!!!!!!!!!!")
 
 if __name__ == '__main__':
     driver = webdriver.Chrome()
@@ -119,9 +124,8 @@ if __name__ == '__main__':
     max_level = 3
     max_step = 100
     input()
-    crawler = InstagramCrawler(driver, max_level, max_step)
+    crawler = InstagramCrawler(driver, max_level, max_step,DoStop)
 
-    keyboard.add_hotkey('ctrl+alt+g', crawler.DoStop)
     keyboard.add_hotkey('ctrl+alt+p', crawler.Play )
     people = crawler.crawl()
     print(people)
