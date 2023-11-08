@@ -64,21 +64,31 @@ def Stoppp():
     global crawler
     driver.switch_to.window(driver.window_handles[-1])
     driver.execute_script(HTML_JS.injection_button2)
-    try:
-        t = WebDriverWait(driver, timeout=6, poll_frequency=0.4).until(EC.alert_is_present())
-    except:
-        pass
+    for i in range(60):
+        t = None
+        try:
+            t = WebDriverWait(driver, timeout=1.5 ,poll_frequency=0.5).until(EC.alert_is_present())
+        except:
+            pass
     
-    if not t == None:
-        crawler.Play()
-        return
-        
+        if not t == None:
+            crawler.Play()
+            return
+
+        if keyboard.is_pressed('ctrl+alt+g'):
+            Stoppp()
+            return
+        time.sleep(0.5)
+
     try:
         alert = driver.switch_to.alert
         alert.dismiss()
     except:
         pass
-    driver.execute_script(HTML_JS.remove_button2)
+    try:
+        driver.execute_script(HTML_JS.remove_button2)
+    except:
+        pass
 
 
 def Getdatetime():
