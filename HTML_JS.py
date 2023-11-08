@@ -3,7 +3,9 @@ var button = document.createElement('button');
 button.id = "jx06BT"
 button.innerHTML = '開始抓取';
 button.onclick = function() {
-    alert('開始抓取');
+    let MaxLevel = document.getElementById('jx06I2').value
+    let MaxStep = document.getElementById('jx06I1').value
+    alert(`開始抓取^${MaxLevel}^${MaxStep}`);
 };
 
 button.style.position = 'fixed';
@@ -75,6 +77,10 @@ document.body.appendChild(input1);
 
 remove_button = """
     let button = document.querySelector('#jx06BT')
+    button.remove()
+    button = document.getElementById('jx06I2')
+    button.remove()
+    button = document.getElementById('jx06I1')
     button.remove()
     """
 

@@ -43,7 +43,7 @@ class InstagramCrawler:
         aboutMe = None
         # print(i,self.people,self.upcoming,me)
         try:
-            wait = WebDriverWait(self.driver, 0.5)
+            wait = WebDriverWait(self.driver, 1.5)
             me = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'h2.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.x1ms8i2q.xo1l8bm.x5n08af.x10wh9bi.x1wdrske.x8viiok.x18hxmgj')))
             aboutMe = self.driver.find_element(By.XPATH, '//*[@class="x7a106z x972fbf xcfux6l x1qhh985 xm0m39n x9f619 x78zum5 xdt5ytf x2lah0s xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x1n2onr6 x11njtxf xwonja6 x1dyjupv x1onnzdu xwrz0qm xgmu61r x1nbz2ho xbjc6do"]')
             print(me.text)
@@ -55,7 +55,6 @@ class InstagramCrawler:
                 NN = self.driver.find_element(By.XPATH, '//span[contains(text(), "發生錯誤")]')
                 if i > self.MaxStep or not self.change(self.upcoming.pop(0) if self.upcoming else None):
                     return
-
                 time.sleep(0.5)
                 self.do_step(i + 1)
                 return
@@ -71,9 +70,17 @@ class InstagramCrawler:
             except:
                 if i > self.MaxStep or not self.change(self.upcoming.pop(0) if self.upcoming else None):
                     return
+                time.sleep(0.5)
+                self.do_step(i + 1)
+                return
+
 
         # print(i,self.people,self.upcoming,me)
-        if i == 0:
+        if i == 0 :
+            count= len(self.driver.window_handles)
+            self.upcoming.extend([None] * count)
+
+        if me.text not in self.people:
             self.people[me.text] = {}
             self.people[me.text]["level"] = 0
             self.people[me.text]["at"] = []
@@ -83,9 +90,10 @@ class InstagramCrawler:
         for at in ats:
             href = at.get_attribute("href")
             att = at.text[1:]
+            if "explore"  in href or "https://www.instagram.com/" not in href or "followers"  in href :
+                continue
             self.people[me.text]["at"].append(att)
-            if "explore" not in href and "https://www.instagram.com/" in href and "followers" not in href and att not in self.people:
-
+            if  att not in self.people:
                 self.people[att] = {}
                 self.people[att]["level"] = self.people[me.text]["level"] + 1
                 self.people[att]["at"] = []
@@ -112,10 +120,10 @@ class InstagramCrawler:
     def Play(self):
         self.state = 1
         self.do_step(self.I)
-        print("5555555555555555555555555555")
+        print("繼續")
 
 def DoStop():
-    print("!!!!!!!!!!!!!!!!!")
+    print("暫停")
 
 if __name__ == '__main__':
     driver = webdriver.Chrome()
