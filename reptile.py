@@ -103,6 +103,7 @@ class InstagramCrawler:
                     if len(self.upcoming) < 10:
                         self.driver.execute_script("window.open('" + href + "', '_blank');")
                         self.upcoming.insert(0, None)
+                        time.sleep(0.5)
                     else:
                         self.upcoming.insert(0, href)
 
