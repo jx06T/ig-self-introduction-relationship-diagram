@@ -106,7 +106,8 @@ div1.style.fontFamily = 'Arial, sans-serif';
 div1.innerText = `1.登入自己帳號後
 2.找到要掃描的人主頁
 3.按下ctrl+alt+g叫出工具欄
-（掃描過程中長按ctrl+alt+g暫停）
+（掃描過程中長按ctrl+alt+g暫停
+長按ctrl+alt+g叫出繼續選單）
 
 提示：
 建議搭配vpn避免ip被封鎖或降速
@@ -119,8 +120,6 @@ document.body.appendChild(div1)
 
 
 injection_button2 = """
-
-
 var button = document.createElement('button');
 button.id = "jx06BT2"
 button.innerHTML = '繼續抓取';
@@ -139,4 +138,21 @@ button.style.width = '100px';
 button.style.height = '35px'; 
 
 document.body.appendChild(button);
+"""
+
+
+injection_data = """
+var data = document.createElement('div');
+data.id = "jx06DT"
+data.innerHTML = '已經掃描$筆資料';
+
+data.style.position = 'fixed';
+data.style.top = '60px'; 
+data.style.right = '20px';
+data.style.borderRadius = '7px';
+// data.style.width = '200px'; 
+data.style.height = '35px'; 
+
+document.body.appendChild(data);
+
 """

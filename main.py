@@ -64,6 +64,7 @@ def Stoppp():
     global crawler
     driver.switch_to.window(driver.window_handles[-1])
     driver.execute_script(HTML_JS.injection_button2)
+    driver.execute_script(HTML_JS.injection_data.replace("$", str(len(crawler.people))))
     for i in range(60):
         t = None
         try:
