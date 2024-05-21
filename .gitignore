@@ -3,3 +3,4 @@ output
 chromedriver.exe
 LICENSE.chromedriver
 venv
+__pycache__
