@@ -1,0 +1,5 @@
+keyboard
+matplotlib
+networkx
+numpy
+selenium

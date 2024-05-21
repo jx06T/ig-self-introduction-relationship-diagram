@@ -105,6 +105,7 @@ def start(driver,data):
         alert.dismiss()
     except:
         pass
+
     try:
         wait = WebDriverWait(driver, 0.5)
         me = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'h2.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.x1ms8i2q.xo1l8bm.x5n08af.x10wh9bi.x1wdrske.x8viiok.x18hxmgj')))
@@ -112,6 +113,7 @@ def start(driver,data):
     except:
         print("錯誤77")
         me = "people_graph"
+    # print(me)
 
     MaxLevel = int(MaxLevel) if not MaxLevel == "" else 4
     MaxStep = int(MaxStep) if not MaxStep == "" else 300
@@ -131,7 +133,12 @@ def start(driver,data):
     print("完成")
 
 # %%
-driver = webdriver.Chrome()
+
+from selenium.webdriver.chrome.service import Service
+gecko_driver_path = "D:\Document_J\code\py\圖表\chromedriver.exe"
+#固定搭配直接用就行了
+service = Service(executable_path=gecko_driver_path)
+driver = webdriver.Chrome(service=service)
 driver.get("https://www.instagram.com/")
 time.sleep(1)
 driver.execute_script(HTML_JS.note)
