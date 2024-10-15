@@ -45,8 +45,15 @@ class InstagramCrawler:
         try:
             wait = WebDriverWait(self.driver, 2)
             me = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'h2.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.x1ms8i2q.xo1l8bm.x5n08af.x10wh9bi.x1wdrske.x8viiok.x18hxmgj')))
-            # aboutMe = self.driver.find_element(By.XPATH, '//*[@class="x7a106z x972fbf xcfux6l x1qhh985 xm0m39n x9f619 x78zum5 xdt5ytf x2lah0s xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x1n2onr6 x11njtxf xwonja6 x1dyjupv x1onnzdu xwrz0qm xgmu61r x1nbz2ho xbjc6do"]')
-            aboutMe = self.driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div[2]/div/div/div[1]/div[2]/div/div[2]/section/main/div/header/section[4]/div/h1')
+            
+            try:
+                # button = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x1ji0vk5.x18bv5gf.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.xvs91rp.xo1l8bm.x1roi4f4.x1yc453h.x10wh9bi.x1wdrske.x8viiok.x18hxmgj')))
+                button = self.driver.find_element(By.CSS_SELECTOR, '.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x1ji0vk5.x18bv5gf.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.xvs91rp.xo1l8bm.x1roi4f4.x1yc453h.x10wh9bi.x1wdrske.x8viiok.x18hxmgj')
+                button.click()
+            except:
+                pass
+
+            aboutMe = self.driver.find_element(By.CSS_SELECTOR, '._ap3a._aaco._aacu._aacx._aad7._aade')
             #有錯改這裡
         except:
             pass
@@ -67,8 +74,15 @@ class InstagramCrawler:
             try:
                 wait = WebDriverWait(self.driver, 3)
                 me = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'h2.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.x1ms8i2q.xo1l8bm.x5n08af.x10wh9bi.x1wdrske.x8viiok.x18hxmgj')))
-                # aboutMe = self.driver.find_element(By.XPATH, '//*[@class="x7a106z x972fbf xcfux6l x1qhh985 xm0m39n x9f619 x78zum5 xdt5ytf x2lah0s xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x1n2onr6 x11njtxf xwonja6 x1dyjupv x1onnzdu xwrz0qm xgmu61r x1nbz2ho xbjc6do"]')
-                aboutMe = self.driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div[2]/div/div/div[1]/div[2]/div/div[2]/section/main/div/header/section[4]/div/h1')
+
+                try:
+                    # button = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x1ji0vk5.x18bv5gf.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.xvs91rp.xo1l8bm.x1roi4f4.x1yc453h.x10wh9bi.x1wdrske.x8viiok.x18hxmgj')))
+                    button = self.driver.find_element(By.CSS_SELECTOR, '.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x1ji0vk5.x18bv5gf.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.xvs91rp.xo1l8bm.x1roi4f4.x1yc453h.x10wh9bi.x1wdrske.x8viiok.x18hxmgj')
+                    button.click()
+                except:
+                    pass
+                    
+                aboutMe = self.driver.find_element(By.CSS_SELECTOR, '._ap3a._aaco._aacu._aacx._aad7._aade')
                 #有錯改這裡
             except:
                 if i > self.MaxStep or not self.change(self.upcoming.pop(0) if self.upcoming else None):
@@ -78,6 +92,7 @@ class InstagramCrawler:
                 return
 
 
+        print(aboutMe)
         # print(i,self.people,self.upcoming,me)
         if i == 0 :
             count= len(self.driver.window_handles)
@@ -131,7 +146,6 @@ def DoStop():
 
 if __name__ == '__main__':
     driver = webdriver.Chrome()
-    # driver.get("https://www.instagram.com/xy__0823/?next=%2F")
     driver.get("https://www.instagram.com")
     max_level = 3
     max_step = 100
