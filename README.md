@@ -1,5 +1,5 @@
 # 掃描並創建哀居自介標註關係圖
-###### *version-V2.2* 
+###### *version-V2.3* 
 ---
 ## 簡介&功能
 - 執行 **main.py** 會看到功能引導
@@ -18,7 +18,9 @@
 ## 下載&安裝
 1.下載資料夾並解壓縮 
 
-2.下載並解壓縮 [**chromedriver.exe**](https://googlechromelabs.github.io/chrome-for-testing/#stable) 至項目資料夾或設定系統變數 ([參考](https://medium.com/@bob800530/selenium-1-%E9%96%8B%E5%95%9Fchrome%E7%80%8F%E8%A6%BD%E5%99%A8-21448980dff9))
+2.下載並解壓縮 [**chromedriver.exe**](https://googlechromelabs.github.io/chrome-for-testing/#stable) 至項目資料夾或設定系統變數 ([參考1](https://medium.com/@bob800530/selenium-1-%E9%96%8B%E5%95%9Fchrome%E7%80%8F%E8%A6%BD%E5%99%A8-21448980dff9)[參考2](**chromedriver.exe**))(目前資料夾中的 **chromedriver.exe** 版本為 129.0.6668)
+
+3.安裝 **requirements.txt** 中的依賴
 
 ## 更新
 - 目前不定期更新需自行至此重新安裝(目前版本2.2)
@@ -26,6 +28,7 @@
 **__！若功能異常請先自行更新__**
 
 ## 更新日誌
+    2023/11/08 (2.3) -> 無聊更新
     2023/11/08 (2.2) -> 重大錯誤修復
     2023/11/05 (1.2) -> 合併功能與錯誤修復
     2023/11/04 (1.1) -> 掃描邏輯實現
