@@ -18,7 +18,7 @@
 ## 下載&安裝
 1.下載資料夾並解壓縮 
 
-2.下載並解壓縮 [**chromedriver.exe**](https://googlechromelabs.github.io/chrome-for-testing/#stable) 至項目資料夾或設定系統變數 ([參考1](https://medium.com/@bob800530/selenium-1-%E9%96%8B%E5%95%9Fchrome%E7%80%8F%E8%A6%BD%E5%99%A8-21448980dff9)[參考2](**chromedriver.exe**))(目前資料夾中的 **chromedriver.exe** 版本為 129.0.6668)
+2.下載並解壓縮 [**chromedriver.exe**](https://googlechromelabs.github.io/chrome-for-testing/#stable) 至項目資料夾或設定系統變數 ([參考1](https://medium.com/@bob800530/selenium-1-%E9%96%8B%E5%95%9Fchrome%E7%80%8F%E8%A6%BD%E5%99%A8-21448980dff9)、[參考2](https://googlechromelabs.github.io/chrome-for-testing/))(目前資料夾中的 **chromedriver.exe** 版本為 129.0.6668)
 
 3.安裝 **requirements.txt** 中的依賴
 
